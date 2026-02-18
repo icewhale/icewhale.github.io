@@ -8,7 +8,7 @@ export default function Header() {
           href="/"
           className="text-base font-semibold tracking-tight hover:opacity-70 transition-opacity"
         >
-          blog
+          ZENYTI's
         </Link>
         <nav className="flex items-center gap-6">
           <Link
