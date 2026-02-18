@@ -2,20 +2,30 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-200 dark:border-gray-800">
-      <div className="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center">
-        <Link href="/" className="text-xl font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          首页
+    <header className="sticky top-0 z-50 backdrop-blur-sm bg-[var(--background)]/80">
+      <div className="max-w-[960px] mx-auto px-6 py-5 flex justify-between items-center">
+        <Link
+          href="/"
+          className="text-base font-semibold tracking-tight hover:opacity-70 transition-opacity"
+        >
+          blog
         </Link>
-        <nav className="flex gap-6">
-          <Link href="/blog" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+        <nav className="flex items-center gap-6">
+          <Link
+            href="/blog"
+            className="text-base text-muted hover:text-[var(--foreground)] transition-colors"
+          >
             文章
           </Link>
-          <Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+          <Link
+            href="/about"
+            className="text-base text-muted hover:text-[var(--foreground)] transition-colors"
+          >
             关于
           </Link>
         </nav>
       </div>
+      <div className="border-b border-[var(--border)]" />
     </header>
   );
 }

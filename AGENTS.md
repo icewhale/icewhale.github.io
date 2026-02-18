@@ -5,7 +5,7 @@
 基于 Next.js 15 (App Router) + TypeScript + Tailwind CSS 的个人技术博客。
 使用 Markdown/MDX 作为内容源，Shiki 做代码高亮，SSG 静态生成。
 
-详细架构参见 `docs/architecture.md`，版本变更参见 `docs/changelog.md`。
+详细架构参见 `docs/architecture.md`，版本变更参见 `docs/changelog.md`，页面视觉规范参见 `docs/style-guide.md`。
 
 ## 关键约定
 
@@ -17,7 +17,8 @@
 | `components/` | 可复用 UI 组件 | 每个组件一个文件，PascalCase 命名，default export |
 | `lib/` | 数据处理、工具函数 | 纯逻辑，不包含 React 组件 |
 | `content/posts/` | 博客文章 | `.md` / `.mdx` 格式，必须包含 frontmatter |
-| `docs/` | 项目文档 | 架构文档和变更日志，需随功能变更同步更新 |
+| `public/fonts/` | 本地字体文件 | 当前存放 `LXGWNeoZhiSong.ttf` |
+| `docs/` | 项目文档 | 架构文档、变更日志和风格指南，需随功能变更同步更新 |
 
 ### 路径别名
 
@@ -60,10 +61,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 ### 样式规范
 
-- 使用 Tailwind CSS 原子类，不写自定义 CSS（全局主题变量除外）
-- 布局最大宽度 `max-w-4xl mx-auto px-4`
+完整视觉规范参见 `docs/style-guide.md`，以下为核心要点：
+
+- 使用 Tailwind CSS 原子类，不写自定义 CSS（全局主题变量和 prose 覆盖除外）
+- 布局最大宽度 `max-w-[960px] mx-auto px-6`
 - 明暗主题通过 CSS 变量 + `prefers-color-scheme` 自动切换
-- 文章正文使用 `prose prose-lg dark:prose-invert` 排版类
+- 文章正文使用 `prose prose-lg max-w-none` 排版类
+- 字体：英文 Roboto、中文 LXGW Neo ZhiSong、等宽 Lilex
+- 颜色仅使用 CSS 变量（`var(--foreground)` / `var(--muted)` / `var(--border)` 等），不使用 Tailwind 的 `gray-*` 等硬编码色
+- 边框统一使用 `border-[var(--border)]`，区块间用 `border-b` / `border-t` 分隔
+- 交互反馈使用 `opacity` 或 `transition-colors`，不使用彩色高亮
+- 新增页面必须遵循 Hero Section (`py-20 border-b`) + Content Section (`py-12`) 的布局模式
 
 ### MDX 组件映射
 
@@ -120,6 +128,7 @@ npm run lint   # ESLint 检查
 
 - **新增/修改模块** → 更新 `docs/architecture.md` 中对应模块说明和依赖关系
 - **任何功能变更** → 在 `docs/changelog.md` 中追加记录
+- **视觉/样式变更** → 更新 `docs/style-guide.md` 中对应的设计规范
 
 ## 注意事项
 
@@ -127,3 +136,5 @@ npm run lint   # ESLint 检查
 - `lucide-react` 已安装但尚未使用，需要图标时优先使用此库
 - 代码高亮组件 `CodeBlock` 中预加载的语言列表是固定的，新增语言需修改 `getHighlighter` 的 `langs` 数组
 - 文章 slug 取自文件名（去后缀），slug 查找优先 `.md` 其次 `.mdx`
+- 中文字体文件（`LXGWNeoZhiSong.ttf`）为本地托管，位于 `public/fonts/`，通过 `@font-face` 在 `globals.css` 中声明
+- 页面视觉迭代前务必阅读 `docs/style-guide.md`，保持风格一致性

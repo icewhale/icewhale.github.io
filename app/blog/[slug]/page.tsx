@@ -38,26 +38,28 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <article className="prose prose-lg dark:prose-invert max-w-none">
-        <header className="mb-8 not-prose">
+    <div className="max-w-[960px] mx-auto px-6">
+      <article>
+        <header className="py-20 border-b border-[var(--border)]">
           <Link
             href="/blog"
-            className="text-blue-600 dark:text-blue-400 hover:underline mb-4 inline-block"
+            className="text-sm text-muted hover:text-[var(--foreground)] transition-colors inline-flex items-center gap-1 mb-8"
           >
-            ← 返回文章列表
+            &larr; 返回文章列表
           </Link>
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+            {post.title}
+          </h1>
+          <div className="flex items-center gap-4 text-sm text-muted">
             <time dateTime={post.date}>
-              {format(new Date(post.date), "yyyy年MM月dd日", { locale: zhCN })}
+              {format(new Date(post.date), "yyyy.MM.dd", { locale: zhCN })}
             </time>
-            {post.tags && (
+            {post.tags && post.tags.length > 0 && (
               <div className="flex gap-2">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs"
+                    className="border border-[var(--border)] rounded-sm px-2 py-0.5 text-xs"
                   >
                     {tag}
                   </span>
@@ -67,7 +69,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         </header>
 
-        <MDXRemote source={post.content} components={MDXComponents} />
+        <div className="prose prose-lg max-w-none py-12">
+          <MDXRemote source={post.content} components={MDXComponents} />
+        </div>
       </article>
     </div>
   );
