@@ -151,6 +151,17 @@ function getAllPostSlugs(): string[]   // 获取所有 slug（用于 SSG）
 
 通过 `@next/mdx` 插件扩展 Next.js，支持 `.md`/`.mdx` 文件作为页面。
 
+- `output: 'export'`：启用静态导出，构建产物输出到 `out/` 目录
+- `images.unoptimized: true`：禁用图片优化（静态托管不支持）
+
+#### .github/workflows/deploy.yml
+
+GitHub Actions 自动部署工作流，推送 `main` 分支时触发：
+
+1. 使用 pnpm 安装依赖
+2. 执行 `pnpm build` 静态导出
+3. 上传 `out/` 目录到 GitHub Pages
+
 #### tailwind.config.ts
 
 - 暗色模式：`class` 策略

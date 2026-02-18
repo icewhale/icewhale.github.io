@@ -1,5 +1,15 @@
 # 功能变更文档
 
+## v0.1.2 (2025-02-18) - GitHub Pages 部署
+
+### 新增功能
+
+#### 部署
+- 配置 `output: 'export'` 静态导出，构建产物输出到 `out/` 目录
+- 配置 `images.unoptimized: true` 适配静态托管环境
+- 添加 GitHub Actions 工作流 (`.github/workflows/deploy.yml`)，推送 `main` 分支自动构建并部署到 GitHub Pages
+- 使用 pnpm 作为 CI 包管理器
+
 ## v0.1.0 (2025-01-01) - 初始版本
 
 首次搭建个人技术博客，完成基础框架和核心功能。
