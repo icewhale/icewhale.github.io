@@ -22,6 +22,7 @@ my-blog/
 │   ├── Header.tsx          # 顶部导航
 │   ├── Footer.tsx          # 页脚
 │   ├── CodeBlock.tsx       # 代码高亮组件
+│   ├── ScrollToTop.tsx     # 返回顶部按钮
 │   └── MDXComponents.tsx   # MDX 自定义组件映射
 ├── content/                # 内容模块
 │   └── posts/              # 博客文章 (.md / .mdx)
@@ -54,7 +55,7 @@ Next.js App Router 的文件系统路由，负责页面渲染和元数据生成�
 - `layout.tsx` → `components/Header`, `components/Footer`
 - `page.tsx` → `lib/posts.getAllPosts()`
 - `blog/page.tsx` → `lib/posts.getAllPosts()`
-- `blog/[slug]/page.tsx` → `lib/posts.getPostBySlug()`, `lib/posts.getAllPostSlugs()`, `components/MDXComponents`
+- `blog/[slug]/page.tsx` → `lib/posts.getPostBySlug()`, `lib/posts.getAllPostSlugs()`, `components/MDXComponents`, `components/ScrollToTop`
 
 ### 2. UI 组件模块 (`components/`)
 
@@ -86,6 +87,15 @@ Next.js App Router 的文件系统路由，负责页面渲染和元数据生成�
 - **支持语言：** TypeScript, JavaScript, Bash, Python, Java, Go, Rust, HTML, CSS, JSON
 - **主题：** github-dark / github-light（跟随系统 `prefers-color-scheme`）
 - **行为：** 加载中显示原始 `<pre>` 回退，异步加载 Shiki 后替换为高亮 HTML
+
+#### ScrollToTop (`ScrollToTop.tsx`)
+
+客户端滚动返回顶部按钮（`"use client"`），监听滚动事件，滚动超过 100px 时在右下角显示。
+
+- **对外暴露：** `default export ScrollToTop`
+- **依赖：** React (`useState`, `useEffect`)
+- **被依赖：** `app/blog/[slug]/page.tsx`
+- **行为：** 监听 `scroll` 事件（passive），`scrollY > 100` 时显示按钮，点击后 `window.scrollTo` 平滑滚回顶部
 
 #### MDXComponents (`MDXComponents.tsx`)
 

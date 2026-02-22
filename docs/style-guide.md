@@ -124,6 +124,16 @@ font-family: "Lilex", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, mon
 - 描述：`text-sm text-muted mt-2`
 - 标签：`text-xs text-muted border rounded-sm px-2 py-0.5`，线框样式
 
+### 返回顶部按钮 (ScrollToTop)
+
+- 固定定位：`fixed bottom-8 right-8 z-50`
+- 毛玻璃效果：`bg-[var(--background)]/80 backdrop-blur-sm`
+- 边框：`border border-[var(--border)] rounded-sm`
+- 图标：向上箭头 chevron-up（内联 SVG，20x20）
+- 文字色：`text-muted`，hover 变为 `var(--foreground)`
+- 显示条件：页面滚动超过 100px 时出现，回到顶部时隐藏
+- 点击行为：`window.scrollTo({ top: 0, behavior: "smooth" })`
+
 ### 文章详情页
 
 - Header 区域包含返回链接（`← 返回文章列表`）、标题、日期、标签
@@ -162,6 +172,7 @@ font-family: "Lilex", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, mon
 | 文章标题 | hover 降低透明度 | `group-hover:opacity-70 transition-opacity` |
 | 正文链接 | hover 下划线加深 | `text-decoration-color` 过渡 |
 | 返回链接 | hover 变为主色 | `hover:text-[var(--foreground)] transition-colors` |
+| 返回顶部按钮 | 滚动 >100px 显示，hover 变为主色 | `hover:text-[var(--foreground)] transition-opacity` |
 
 ## 样式文件职责
 
