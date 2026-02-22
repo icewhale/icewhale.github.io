@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { zhCN } from "date-fns/locale";
 import Link from "next/link";
 import MDXComponents from "@/components/MDXComponents";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export function generateStaticParams() {
   const slugs = getAllPostSlugs();
@@ -73,6 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <MDXRemote source={post.content} components={MDXComponents} />
         </div>
       </article>
+      <ScrollToTop />
     </div>
   );
 }
